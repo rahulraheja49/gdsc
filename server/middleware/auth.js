@@ -11,11 +11,16 @@ exports.userAuth = async (req, res, next) => {
       return res.status(401).json({ msg: "No token, authorization denied" });
     }
 
-    const dateNow = new Date();
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    if (decoded.exp < dateNow.getTime() / 1000) {
-      return res.status(403).send({ msg: "Token expired", success: false });
-    }
+    // const dateNow = new Date();
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+      if (err) {
+        return res.status(403).send({ msg: "Token expired", success: false });
+      }
+    });
+    // const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    // if (decoded.exp < dateNow.getTime() / 1000) {
+    //   return res.status(403).send({ msg: "Token expired", success: false });
+    // }
     // console.log(decoded);
 
     if (Date.now() >= exp * 1000) {
