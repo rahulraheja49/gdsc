@@ -14,7 +14,7 @@ exports.userAuth = async (req, res, next) => {
     const dateNow = new Date();
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     if (decoded.exp < dateNow.getTime() / 1000) {
-      res.status(403).send({ msg: "Token expired", success: false });
+      return res.status(403).send({ msg: "Token expired", success: false });
     }
     // console.log(decoded);
 
