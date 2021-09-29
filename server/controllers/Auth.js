@@ -1,5 +1,8 @@
 const jwt = require("jsonwebtoken");
 
+// @desc    Get token for signin
+// @route   GET /api/auth/getToken
+// @access  Anyone
 exports.getToken = async (req, res) => {
   try {
     const token = jwt.sign({}, process.env.JWT_SECRET, { expiresIn: "24h" });

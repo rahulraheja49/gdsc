@@ -2,6 +2,9 @@ const jwt = require("jsonwebtoken");
 
 const Student = require("../models/Student");
 
+// @desc    Add student
+// @route   POST /api/student/addStudent
+// @access  Only authenticated
 exports.addStudent = async (req, res) => {
   try {
     const { name, division, id, year } = req.body;
@@ -21,6 +24,9 @@ exports.addStudent = async (req, res) => {
   }
 };
 
+// @desc    Delete student
+// @route   POST /api/student/deleteStudent
+// @access  Only authenticated
 exports.deleteStudent = async (req, res) => {
   try {
     const { id } = req.body;
@@ -35,6 +41,9 @@ exports.deleteStudent = async (req, res) => {
   }
 };
 
+// @desc    Get all students
+// @route   GET /api/student/getStudents
+// @access  Only authenticated
 exports.getStudents = async (req, res) => {
   try {
     const students = await Student.find({});
@@ -46,6 +55,9 @@ exports.getStudents = async (req, res) => {
   }
 };
 
+// @desc    Get specific student details
+// @route   POST /api/student/getStudentDetails
+// @access  Only authenticated
 exports.getStudentDetails = async (req, res) => {
   try {
     const student = await Student.findOne({ id: req.body.studentId });
@@ -62,6 +74,9 @@ exports.getStudentDetails = async (req, res) => {
   }
 };
 
+// @desc    Update student
+// @route   POST /api/student/updateStudent
+// @access  Only authenticated
 exports.updateStudent = async (req, res) => {
   try {
     const { name, division, id, year } = req.body;
